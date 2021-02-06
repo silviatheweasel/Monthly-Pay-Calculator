@@ -1,0 +1,14 @@
+.row {
+    box-sizing: border-box;
+    padding: 15px 0;
+    border-bottom: 2px solid white;
+    width: 90%;
+    margin: 0 auto;
+    list-style-type: none;
+}
+
+.row span {
+    display: inline-block;
+    padding: 10px;
+    width: 30%;
+}
