@@ -2,34 +2,38 @@ import React from "react";
 import './TimeSheet.css';
 import { TimeSheetRow } from '../TimeSheetRow/TimeSheetRow';
 
-let keyIndex = 0;
 
 export class TimeSheet extends React.Component {
     constructor(props) {
         super(props);
-        this.state = {rows: [{ hours: 0,
-                            minutes: 0,
-                            key: 0
-                            }]
-                    }
-        this.handleClick = this.handleClick.bind(this);
+        
+        // this.handleClick = this.handleClick.bind(this);
+      
     }
     
-    handleClick() {
-        keyIndex++;
-        const newRow = { hours: 1, 
-                         minutes: 30, 
-                         key: keyIndex,
-                        };      
-        this.state.rows.push(newRow);
-        this.setState ({ rows: this.state.rows });
-    }
+    // handleClick() {
+    //     let newRow = {  hours: '', 
+    //                     minutes: '', 
+    //                     id: key,
+    //                  };   
+    //     key++;   
+    //     this.props.rows.push(newRow);
+    //     this.props.updateRows(this.props.rows);
+    // }
+
+
 
     render() {
         return (
             <div className="TimeSheet" >
                 <ul id="TimeSheet">
-                    {this.state.rows.map(row => <TimeSheetRow key={row.key} hours={row.hours} minutes={row.minutes} />)}
+                    {this.props.rows.map(row => 
+                    <TimeSheetRow   id={row.id} 
+                                    hours={row.hours} 
+                                    minutes={row.minutes}
+                                    updateInput={this.props.updateInput}
+                                    
+                    />)}
                 </ul>
                 <button className="addRow" 
                         onClick={this.handleClick}
