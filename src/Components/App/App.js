@@ -1,51 +1,99 @@
 import './App.css';
 import React from "react";
 import { CalculateButton } from '../CalculateButton/CalculateButton';
-import { TimeSheet } from '../TimeSheet/TimeSheet';
 import { HourlyRateInput } from '../HourlyRateInput/HourlyRateInput';
 
-let key = 0;
 
 class App extends React.Component {
   constructor(props) {
     super(props);
 
-    this.state = { rows: [{ hours: '',
-                            minutes: '',
-                            id: key,
+    this.state = { rows: [{ hours: 0,
+                            minutes: 0,
+                          }, { hours: 0,
+                            minutes: 0,
+                          }, { hours: 0,
+                            minutes: 0,
                           }],
-                   totalPay: '',
+                    hourlyRate: ''
                   };
     
-    this.updateInput = this.updateInput.bind(this);
-    this.updateRows = this.updateRows.bind(this);
-
-
+    this.addRow = this.addRow.bind(this);
   }
 
-  updateInput(stateObjectKey, inputValue) {
-    let newInput = {[stateObjectKey] : inputValue};
-    let firstRow = this.state.rows[key];
-    let firstRowClone = { ... firstRow };
-    let newRow = { ... firstRowClone, ...newInput };
-    this.setState({ rows: [newRow] }); 
-    
+  handleChange(i, event) {
+    let rows = this.state.rows;
+
+    if (event.target.name === "hours") {
+      rows[i].hours = event.target.value;
+
+      this.setState({ rows: rows });
+    } else if (event.target.name === "minutes") {
+      rows[i].minutes = event.target.value;
+
+      this.setState({ rows: rows });
+    }  
   }
 
-  updateRows(addedRows) {
-    this.setState({ rows: addedRows });
+  renderRows() {
+    var context = this;
+
+         return this.state.rows.map((row,i) => {
+            return ( <li className="row" key={"row" + i}>
+              <span>
+                <input  type="number"
+                        name="hours"
+                        min="0"
+                        value={row.hours}
+                        onChange={context.handleChange.bind(context,i)}                  
+                  /> hour
+              </span>
+              <span>
+                  <input  type="number"
+                          name="minutes"
+                          min="0"
+                          max="59"
+                          value={row.minutes}
+                          onChange={context.handleChange.bind(context,i)}                        
+                  /> minute
+              </span>
+              <button onClick={context.deleteRow.bind(context,i)}><i class="fas fa-minus"></i></button>
+            </li>)
+          }) 
   }
 
+  addRow() {
+    const newRow = {  hours: 0,
+                      minutes: 0,
+                    };
+    const rows = this.state.rows;
+    rows.push(newRow);
+    this.setState({ rows: rows });
+  }
 
+  deleteRow(i) {
+    let rows = this.state.rows;
+    rows.splice(i, 1);
+    this.setState({ rows: rows});
+  }
+
+  addHourlyRate() {
+
+  }
 
   render() {
     return (
       <div className="App">
         <h1>Monthly Pay Calculator</h1>
-          <TimeSheet  rows={this.state.rows} 
-                      updateRows={this.updateRows} 
-                      updateInput={this.updateInput}
-                      />
+        <ul>
+          {this.renderRows()}
+        </ul>
+        <button className="addRow" 
+                        onClick={this.addRow}
+                >
+                            <i className="fas fa-plus-circle"></i> 
+                            Add Row
+                </button>
           <HourlyRateInput />
           <CalculateButton /> 
       </div>
