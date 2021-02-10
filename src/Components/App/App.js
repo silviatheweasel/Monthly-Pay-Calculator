@@ -1,24 +1,20 @@
 import './App.css';
 import React from "react";
-import { CalculateButton } from '../CalculateButton/CalculateButton';
-import { HourlyRateInput } from '../HourlyRateInput/HourlyRateInput';
 
-
-class App extends React.Component {
+export class App extends React.Component {
   constructor(props) {
     super(props);
 
     this.state = { rows: [{ hours: 0,
                             minutes: 0,
-                          }, { hours: 0,
-                            minutes: 0,
-                          }, { hours: 0,
-                            minutes: 0,
                           }],
-                    hourlyRate: ''
+                    hourlyRate: 25
                   };
     
     this.addRow = this.addRow.bind(this);
+    this.addHourlyRate = this.addHourlyRate.bind(this);
+    this.handleClick = this.handleClick.bind(this);
+
   }
 
   handleChange(i, event) {
@@ -44,20 +40,25 @@ class App extends React.Component {
                 <input  type="number"
                         name="hours"
                         min="0"
+                        max="60"
+                        className="inputField"
                         value={row.hours}
                         onChange={context.handleChange.bind(context,i)}                  
-                  /> hour
+         /> hour
               </span>
               <span>
                   <input  type="number"
                           name="minutes"
                           min="0"
                           max="59"
+                          className="inputField"
                           value={row.minutes}
                           onChange={context.handleChange.bind(context,i)}                        
                   /> minute
               </span>
-              <button onClick={context.deleteRow.bind(context,i)}><i class="fas fa-minus"></i></button>
+              <button onClick={context.deleteRow.bind(context,i)}
+                      className="deleteRowButton"
+              ><i class="fas fa-trash-alt"></i></button>
             </li>)
           }) 
   }
@@ -77,28 +78,61 @@ class App extends React.Component {
     this.setState({ rows: rows});
   }
 
-  addHourlyRate() {
+  addHourlyRate(event) {
+    this.setState( { hourlyRate: event.target.value });
+  }
 
+  calculatePay() {
+    const hoursArray = this.state.rows.map(row => parseInt(row.hours));
+    const minutesArray = this.state.rows.map(row => parseInt(row.minutes));
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let totalHours = hoursArray.reduce(reducer);
+    let totalMinutes = minutesArray.reduce(reducer);
+    let totalPay = ((totalHours + totalMinutes / 60) * this.state.hourlyRate).toFixed(2); 
+    return totalPay;
+  }
+
+  handleClick() {
+    const totalPay = this.calculatePay();
+    const displaySentence = "Your total pay this month is £" + totalPay
+    document.getElementById("calculationDisplay").innerHTML = displaySentence;
   }
 
   render() {
     return (
       <div className="App">
         <h1>Monthly Pay Calculator</h1>
-        <ul>
-          {this.renderRows()}
-        </ul>
-        <button className="addRow" 
-                        onClick={this.addRow}
-                >
-                            <i className="fas fa-plus-circle"></i> 
-                            Add Row
-                </button>
-          <HourlyRateInput />
-          <CalculateButton /> 
+        <div className="rows">
+          <ul>
+            {this.renderRows()}
+          </ul>
+          <button className="addRow" 
+                  onClick={this.addRow}
+          >
+              <i className="fas fa-plus-circle"></i> Add Row
+          </button>
+        </div>
+        <div className="HourlyRateInput">
+            My hourly rate is £
+            <input  name="HourlyRate"
+                    type="number"
+                    className="inputField"
+                    value={this.hourlyRate}
+                    defaultValue="25"
+                    min="0"
+                    max="1000"
+                    onChange={this.addHourlyRate}
+            >
+            </input>
+        </div>
+          <button className="CalculateButton" 
+                  onClick={this.handleClick}
+          >
+                Calculate
+          </button>
+          <p id="calculationDisplay">
+          </p>
       </div>
     );
   }
 }
-
-export default App;
