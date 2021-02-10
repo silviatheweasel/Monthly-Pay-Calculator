@@ -1,9 +1,90 @@
 .App {
   text-align: center;
+  width: 60%;
+  background-color: #5C2751;
+  color: #76E5FC;
+  padding: 40px;
+  margin: 0 auto;
+  min-height: 50vh;
+}
+
+* {
+  box-sizing: border-box;
 }
 
 h1 {
-  color: #F36100;
-  padding: 15px;
+  color: #9dacff;
+  padding: 15px 0 30px 0;
+  font-size: 35px;
 }
 
+.rows {
+  border: 1px solid white;
+  padding: 30px;
+  width: 65%;
+  margin: 30px auto;
+  border-radius: 4px;
+}
+
+ul {
+  padding: 0;
+  margin: 0;
+}
+
+ul li {
+  list-style-type: none;
+  padding: 10px;
+  border-bottom: 1px solid white;
+}
+
+span {
+  width: 40xp;
+  display: inline-block;
+  padding: 5px;
+}
+
+.inputField {
+  width: 20xp !important;
+  margin: 0 5px;
+  border-radius: 3px;
+}
+
+.HourlyRateInput {
+  padding: 20px;
+}
+
+button {
+  padding: 8px 10px;
+  border: none;
+  background-color: #4bc0d9;
+  border-radius: 5px;
+  color: white;
+  cursor: pointer;
+  outline: none;
+}
+
+button:hover, 
+button:active {
+  background-color: #9DACFF;
+}
+
+.addRow, .CalculateButton {
+  margin: 30px 0;
+}
+
+.deleteRowButton {
+  margin-left: 50px;
+  padding: 8px 20px;
+}
+
+.CalculateButton {
+  background-color: #9dacff;
+  color: #5C2751;
+  font-size: 20px;
+  padding: 10px 15px;
+}
+
+.CalculateButton:hover,
+.CalculateButton:active {
+  background-color: white;
+}
