@@ -92,10 +92,20 @@ export class App extends React.Component {
     return totalPay;
   }
 
+  calculateHours() {
+    const hoursArray = this.state.rows.map(row => parseInt(row.hours));
+    const minutesArray = this.state.rows.map(row => parseInt(row.minutes));
+    const reducer = (accumulator, currentValue) => accumulator + currentValue;
+    let totalHours = hoursArray.reduce(reducer);
+    let totalMinutes = minutesArray.reduce(reducer);
+    return `You worked ${totalHours} hours and ${totalMinutes} minutes this month.`
+
+  }
+
   handleClick() {
     const totalPay = this.calculatePay();
-    const displaySentence = "Your total pay this month is £" + totalPay
-    document.getElementById("calculationDisplay").innerHTML = displaySentence;
+    const displaySentence = this.calculateHours() + " Your total pay this month is £" + totalPay;
+    document.getElementById("calculationDisplay").innerHTML =  displaySentence;
   }
 
   render() {
