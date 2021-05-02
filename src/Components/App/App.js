@@ -44,7 +44,7 @@ export class App extends React.Component {
                         className="inputField"
                         value={row.hours}
                         onChange={context.handleChange.bind(context,i)}                  
-         /> hour
+         /> {row.hours > 1 ? "hours" : "hour"}
               </span>
               <span>
                   <input  type="number"
@@ -54,11 +54,11 @@ export class App extends React.Component {
                           className="inputField"
                           value={row.minutes}
                           onChange={context.handleChange.bind(context,i)}                        
-                  /> minute
+                  /> {row.minutes > 1 ? "minutes" : "minute"}
               </span>
               <button onClick={context.deleteRow.bind(context,i)}
                       className="deleteRowButton"
-              ><i class="fas fa-trash-alt"></i></button>
+              ><i className="fas fa-minus"></i></button>
             </li>)
           }) 
   }
@@ -105,13 +105,14 @@ export class App extends React.Component {
   handleClick() {
     const totalPay = this.calculatePay();
     const displaySentence = this.calculateHours() + " Your total pay this month is £" + totalPay;
+    document.getElementById("calculationDisplay").style.display = "block";
     document.getElementById("calculationDisplay").innerHTML =  displaySentence;
   }
 
   render() {
     return (
       <div className="App">
-        <h1>Monthly Pay Calculator</h1>
+        {/* <h1>Monthly Pay Calculator</h1> */}
         <div className="rows">
           <ul>
             {this.renderRows()}
@@ -123,9 +124,10 @@ export class App extends React.Component {
           </button>
         </div>
         <div className="HourlyRateInput">
-            My hourly rate is £
+            <span>My hourly rate is £</span>
             <input  name="HourlyRate"
                     type="number"
+                    id="hourlyInput"
                     className="inputField"
                     value={this.hourlyRate}
                     defaultValue="25"
@@ -134,14 +136,14 @@ export class App extends React.Component {
                     onChange={this.addHourlyRate}
             >
             </input>
-        </div>
-          <button className="CalculateButton" 
-                  onClick={this.handleClick}
-          >
+            <button className="CalculateButton" 
+                    onClick={this.handleClick}
+             >
                 Calculate
-          </button>
-          <p id="calculationDisplay">
-          </p>
+            </button>
+        </div>
+        <p id="calculationDisplay">
+        </p>
       </div>
     );
   }

@@ -1,90 +1,194 @@
-.App {
-  text-align: center;
-  width: 60%;
-  background-color: #5C2751;
-  color: #76E5FC;
-  padding: 40px;
+html .App .rows, html .App .HourlyRateInput, html .App #calculationDisplay {
+  width: 80%;
   margin: 0 auto;
-  min-height: 50vh;
+  padding: 60px 40px;
+  background-color: rgba(255, 255, 255, 0.5);
+  -webkit-backdrop-filter: blur(10px);
+          backdrop-filter: blur(10px);
+  border-radius: 21px;
+  -webkit-box-shadow: 4px 0px 11px 0px rgba(70, 61, 49, 0.67);
+  box-shadow: 4px 0px 11px 0px rgba(70, 61, 49, 0.67);
+}
+
+html .App .rows ul .row .deleteRowButton, html .App .rows .addRow, html .App .HourlyRateInput .CalculateButton {
+  padding: 10px 30px;
+  border: none;
+  cursor: pointer;
+  border-radius: 63px;
+  background: #ededed;
+  color: #090931;
+  font-size: 14px;
+  font-weight: 600;
+  -webkit-box-shadow: 10px 10px 20px #535050, -10px -10px 20px #fafafa;
+          box-shadow: 10px 10px 20px #535050, -10px -10px 20px #fafafa;
+}
+
+html .App .rows ul .row .deleteRowButton:active, html .App .rows .addRow:active, html .App .HourlyRateInput .CalculateButton:active {
+  border-radius: 63px;
+  background: #ededed;
+  -webkit-box-shadow: inset 23px 23px 22px #c9c9c9, inset -23px -23px 22px #ffffff;
+          box-shadow: inset 23px 23px 22px #c9c9c9, inset -23px -23px 22px #ffffff;
+}
+
+html .App .rows ul .row span .inputField, html .App .HourlyRateInput .inputField {
+  outline: none;
+  border: none;
+  border-radius: 50%;
+  width: 60px;
+  height: 60px;
+  margin-right: 5px;
+  background: #ededed;
+  color: #090931;
+  padding: 10px;
+  text-align: center;
+  font-size: 16px;
+  font-weight: 600;
+  -webkit-box-shadow: inset 24px 24px 16px #d8d8d8, inset -24px -24px 16px #ffffff;
+          box-shadow: inset 24px 24px 16px #d8d8d8, inset -24px -24px 16px #ffffff;
+  -moz-appearance: textfield;
+}
+
+html .App .rows ul .row span .inputField::-webkit-outer-spin-button, html .App .HourlyRateInput .inputField::-webkit-outer-spin-button, html .App .rows ul .row span .inputField::-webkit-inner-spin-button, html .App .HourlyRateInput .inputField::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
 }
 
 * {
-  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+  -webkit-box-sizing: border-box;
+          box-sizing: border-box;
 }
 
-h1 {
-  color: #9dacff;
-  padding: 15px 0 30px 0;
-  font-size: 35px;
+html {
+  width: 100%;
+  background: #EDEDED url("./background.jpg") no-repeat center center;
+  background-attachment: fixed;
+  background-size: cover;
+  height: 100vh;
+  overflow-y: auto;
 }
 
-.rows {
-  border: 1px solid white;
-  padding: 30px;
-  width: 65%;
-  margin: 30px auto;
-  border-radius: 4px;
+html .App {
+  padding: 50px 100px;
+  font-family: Poppins;
+  color: #090931;
+  font-size: 16px;
 }
 
-ul {
+html .App .rows {
+  margin-bottom: 5px;
+}
+
+html .App .rows ul {
   padding: 0;
   margin: 0;
 }
 
-ul li {
+html .App .rows ul .row {
   list-style-type: none;
-  padding: 10px;
-  border-bottom: 1px solid white;
+  padding: 15px;
 }
 
-span {
-  width: 40xp;
+html .App .rows ul .row span {
+  width: 40%;
   display: inline-block;
-  padding: 5px;
 }
 
-.inputField {
-  width: 20xp !important;
-  margin: 0 5px;
-  border-radius: 3px;
+html .App .rows .addRow {
+  margin: 25px auto 0 auto;
+  display: block;
+  color: #090931;
+  font-size: 14px;
+  margin-top: 40px;
 }
 
-.HourlyRateInput {
-  padding: 20px;
+html .App .rows .addRow i {
+  margin-right: 5px;
 }
 
-button {
-  padding: 8px 10px;
-  border: none;
-  background-color: #4bc0d9;
-  border-radius: 5px;
-  color: white;
-  cursor: pointer;
-  outline: none;
+html .App .HourlyRateInput {
+  position: relative;
+  margin-bottom: 5px;
+  padding: 30px 40px;
 }
 
-button:hover, 
-button:active {
-  background-color: #9DACFF;
+html .App .HourlyRateInput .inputField {
+  margin-left: 10px;
 }
 
-.addRow, .CalculateButton {
-  margin: 30px 0;
+html .App .HourlyRateInput .CalculateButton {
+  position: absolute;
+  right: 40px;
+  top: 40px;
 }
 
-.deleteRowButton {
-  margin-left: 50px;
-  padding: 8px 20px;
+html .App #calculationDisplay {
+  display: none;
 }
 
-.CalculateButton {
-  background-color: #9dacff;
-  color: #5C2751;
-  font-size: 20px;
-  padding: 10px 15px;
+@media only screen and (max-width: 800px) {
+  html .App .rows, html .App .HourlyRateInput, html .App #calculationDisplay {
+    width: 100%;
+  }
+  .App {
+    padding: 50px !important;
+  }
 }
 
-.CalculateButton:hover,
-.CalculateButton:active {
-  background-color: white;
+@media only screen and (max-width: 600px) {
+  html .App .rows, html .App .HourlyRateInput, html .App #calculationDisplay {
+    padding: 60px 20px;
+  }
+  .App {
+    padding: 20px !important;
+  }
+  .CalculateButton {
+    top: 70px !important;
+  }
 }
+
+@media only screen and (max-width: 500px) {
+  input {
+    padding: 12px 10px !important;
+  }
+  .row {
+    padding: 10px 0 !important;
+  }
+  .row .deleteRowButton {
+    padding: 10px 20px !important;
+  }
+  #hourlyInput {
+    padding: 18px 8px !important;
+  }
+}
+
+@media only screen and (max-width: 420px) {
+  .App {
+    padding: 10px !important;
+  }
+  html .App .rows, html .App .HourlyRateInput, html .App #calculationDisplay {
+    padding: 40px 15px;
+  }
+  span:nth-child(1) {
+    width: 35% !important;
+  }
+  span:nth-child(2) {
+    width: 45% !important;
+  }
+  .HourlyRateInput {
+    position: inherit !important;
+  }
+  .HourlyRateInput .CalculateButton {
+    position: static !important;
+    margin: 30px auto 0 auto;
+    display: block;
+  }
+}
+
+@media only screen and (max-width: 350px) {
+  input {
+    margin-right: 0 !important;
+  }
+}
+/*# sourceMappingURL=App.css.map */
