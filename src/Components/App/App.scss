@@ -1,0 +1,204 @@
+%card {
+    width: 80%;
+    margin: 0 auto;
+    padding: 60px 40px;
+    background-color: rgba(255, 255, 255, 0.5);
+    backdrop-filter: blur(10px);
+    border-radius: 21px;
+    -webkit-box-shadow: 4px 0px 11px 0px rgba(70, 61, 49, 0.67);
+    -moz-box-shadow:    4px 0px 11px 0px rgba(70, 61, 49, 0.67);
+    box-shadow:         4px 0px 11px 0px rgba(70, 61, 49, 0.67);
+}
+
+%button {
+    padding: 10px 30px;
+    border: none;
+    cursor: pointer;
+    border-radius: 63px;
+    background: #ededed;
+    color: rgb(9, 9, 49);
+    font-size: 14px;
+    font-weight: 600;
+    box-shadow:  10px 10px 20px #535050,
+                 -10px -10px 20px #fafafa;
+}
+
+%buttonClick {
+    border-radius: 63px;
+    background: #ededed;
+    box-shadow: inset 23px 23px 22px #c9c9c9,
+                inset -23px -23px 22px #ffffff;
+}
+
+%input {
+    outline: none;
+    border: none;
+    border-radius: 50%;
+    width: 60px;
+    height: 60px;
+    margin-right: 5px;
+    background: #ededed;
+    color: rgb(9, 9, 49);
+    padding: 10px;
+    text-align: center;
+    font-size: 16px;
+    font-weight: 600;
+    box-shadow: inset 24px 24px 16px #d8d8d8,
+                inset -24px -24px 16px #ffffff;
+    &::-webkit-outer-spin-button,
+    &::-webkit-inner-spin-button {
+        -webkit-appearance: none;
+        margin: 0;
+    }
+    -moz-appearance: textfield;
+}
+
+* {
+    padding: 0;
+    margin: 0;
+    box-sizing: border-box;
+    // border: 1px solid black;
+}
+
+html {
+    width: 100%;
+    background: #EDEDED url("./background.jpg") no-repeat center center;
+    background-attachment: fixed;
+    background-size: cover;
+    height: 100vh;
+    overflow-y: auto;
+    .App {
+        padding: 50px 100px;
+        font-family: Poppins;
+        color: rgb(9, 9, 49);
+        font-size: 16px;
+        .rows {
+            @extend %card;
+            margin-bottom: 5px;
+            ul {
+                padding: 0;
+                margin: 0;
+                .row {
+                    list-style-type: none;
+                    padding: 15px;
+                    span {
+                        width: 40%;
+                        display: inline-block;
+                        .inputField {
+                            @extend %input;
+                        }
+                    }
+                    .deleteRowButton {
+                        @extend %button;
+                        &:active {
+                            @extend %buttonClick;
+                        }
+                    }
+                }
+            }
+            .addRow {
+                @extend %button;
+                margin: 25px auto 0 auto;
+                display: block;
+                color: rgb(9, 9, 49);
+                font-size: 14px;
+                margin-top: 40px;
+                &:active {
+                    @extend %buttonClick;
+                }
+                i {
+                    margin-right: 5px;
+                }
+            }
+        }
+        .HourlyRateInput {
+            @extend %card;
+            position: relative;
+            margin-bottom: 5px;
+            padding: 30px 40px;
+            .inputField {
+                @extend %input;
+                margin-left: 10px;
+            }
+            .CalculateButton {
+                @extend %button;
+                position: absolute;
+                right: 40px;
+                top: 40px;
+                &:active {
+                    @extend %buttonClick;
+                }
+            }
+        }
+        #calculationDisplay {
+            display: none;
+            @extend %card;
+        }
+    }  
+}
+
+@media only screen and (max-width: 800px) {
+    %card {
+        width: 100%;
+    }
+    .App {
+        padding: 50px !important;
+    }
+}
+
+@media only screen and (max-width: 600px) {
+    %card {
+        padding: 60px 20px;
+    }
+    .App {
+        padding: 20px !important;
+    }
+    .CalculateButton {
+        top: 70px !important;
+    }
+}
+
+@media only screen and (max-width: 500px) {
+    input {
+        padding: 12px 10px !important;
+    }
+    .row {
+        padding: 10px 0 !important;
+        .deleteRowButton {
+            padding: 10px 20px !important;
+        }
+    }
+    #hourlyInput {
+        padding: 18px 8px !important;
+    }
+}
+
+@media only screen and (max-width: 420px) {
+    .App {
+        padding: 10px !important;
+    }
+    %card {
+        padding: 40px 15px;
+    }
+    span:nth-child(1) {
+        width: 35% !important;
+    }
+    span:nth-child(2) {
+        width: 45% !important;
+    }
+    .HourlyRateInput {
+        position: inherit !important;
+        .CalculateButton {
+            position: static !important;
+            margin: 30px auto 0 auto;
+            display: block;
+        }
+    } 
+}
+
+@media only screen and (max-width: 350px) {
+    input {
+        margin-right: 0 !important;
+    }
+}
+
