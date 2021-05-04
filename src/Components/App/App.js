@@ -98,8 +98,19 @@ export class App extends React.Component {
     const reducer = (accumulator, currentValue) => accumulator + currentValue;
     let totalHours = hoursArray.reduce(reducer);
     let totalMinutes = minutesArray.reduce(reducer);
-    return `You worked ${totalHours} hours and ${totalMinutes} minutes this month.`
-
+    if (totalMinutes < 60) {
+      if (totalHours < 1) {
+        return `You worked ${totalMinutes} minutes this month.`
+      }
+      return `You worked ${totalHours} hours and ${totalMinutes} minutes this month.`
+    } else if (totalMinutes >= 60) {
+      totalHours += Math.floor(totalMinutes / 60);
+      totalMinutes = totalMinutes % 60;
+      if (totalMinutes === 0) {
+        return `You worked ${totalHours} hours this month.`
+      }
+      return `You worked ${totalHours} hours and ${totalMinutes} minutes this month.`
+    }  
   }
 
   handleClick() {
